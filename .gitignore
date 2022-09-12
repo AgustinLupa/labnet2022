@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+#por alguna razon el gitignore no ignora la carpa properties
+.properties/
+/LabNet2022.HelloWorld/LabNet2022.HelloWorld/Properties
