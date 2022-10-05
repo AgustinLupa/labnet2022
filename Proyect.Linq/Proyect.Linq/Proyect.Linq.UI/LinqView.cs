@@ -25,17 +25,14 @@ namespace Proyect.Linq.UI
         private void btnExcer1_Click(object sender, EventArgs e)
         {
             lbList.Items.Clear();
-            IEnumerable<Customers> query = customerLogic.GetAll().Take(1);           
-            foreach (Customers customer in query)
-            {
-                lbList.Items.Add(customer.ContactName);
-            }
+            var query = customerLogic.FirstCustomer();           
+            lbList.Items.Add(query.ContactName);
         }
 
         private void btnExcer2_Click(object sender, EventArgs e)
         {
             lbList.Items.Clear();
-            IEnumerable<Products> query = productLogic.GetAll().Where(p=> p.UnitsInStock < 1);
+            var query = productLogic.GetProductOutOfStock();
             foreach (Products products in query)
             {
                 lbList.Items.Add(products.ProductName);
@@ -45,8 +42,7 @@ namespace Proyect.Linq.UI
         private void btnExcer3_Click(object sender, EventArgs e)
         {
             lbList.Items.Clear();
-            IEnumerable<Products> query = productLogic.GetAll().Where(p => p.UnitsInStock > 0 
-            && p.UnitPrice > 3);
+            IEnumerable<Products> query = productLogic.GetProducts();
             foreach (Products products in query)
             {
                 lbList.Items.Add(products.ProductName);
@@ -56,7 +52,7 @@ namespace Proyect.Linq.UI
         private void btnExcer4_Click(object sender, EventArgs e)
         {
             lbList.Items.Clear();
-            IEnumerable<Customers> query = customerLogic.GetAll().Where(c => c.Region == "WA");
+            IEnumerable<Customers> query = customerLogic.GetCustomerRegion();
             foreach (Customers customers in query)
             {
                 lbList.Items.Add(customers.CompanyName);
@@ -66,7 +62,7 @@ namespace Proyect.Linq.UI
         private void btnExcer5_Click(object sender, EventArgs e)
         {
             lbList.Items.Clear();
-            IEnumerable<Products> query = productLogic.GetAll().Where(p => p.ProductID == 789);
+            IEnumerable<Products> query = productLogic.GetProductsByID(789);
             foreach (Products products in query)
             {
                 lbList.Items.Add(products.ProductName);
@@ -90,35 +86,18 @@ namespace Proyect.Linq.UI
 
         private void btnExcer7_Click(object sender, EventArgs e)
         {
-            lbList.Items.Clear();
-            var queryOrder = OrdersLogic.GetAll();
-            var queryCustomer = customerLogic.GetAll();
-
-            var query = from order in queryOrder
-                        join customers in queryCustomer
-                        on new { order.CustomerID }
-                            equals new { customers.CustomerID }
-                        where customers.Region == "WA" && order.OrderDate > DateTime.Parse("1997-01-01")
-                        select new
-                        {
-                            order.OrderID,
-                            customers.ContactName,
-                            customers.Region,
-                            order.OrderDate
-                        };
+            lbList.Items.Clear();            
+            var query = customerLogic.GetOrderInCustomer();
             foreach (var item in query)
             {
-                lbList.Items.Add($"Order: {item.OrderID}, for: {item.ContactName}, region: {item.Region}, Fecha: {item.OrderDate}");
+                lbList.Items.Add(item.ToString());
             }
         }
 
         private void btnExcer8_Click(object sender, EventArgs e)
         {
             lbList.Items.Clear();
-            var queryCustomer = customerLogic.GetAll();
-            IEnumerable<Customers> query = from customers in queryCustomer
-                                           where (customers.Region == "WA")
-                                           select customers;           
+            IEnumerable<Customers> query = customerLogic.GetCustomersRegion("WA");           
             foreach (var item in query)
             {
                 lbList.Items.Add(item.CompanyName);
@@ -128,10 +107,8 @@ namespace Proyect.Linq.UI
         private void btnExcer9_Click(object sender, EventArgs e)
         {
             lbList.Items.Clear();
-            var queryProduct = productLogic.GetAll();
-            IEnumerable<Products> query = from products in queryProduct
-                                          orderby products.ProductName ascending
-                                          select products;
+
+            IEnumerable<Products> query = productLogic.GetProductOrderlyAsc();
             foreach (var item in query)
             {
                 lbList.Items.Add(item.ProductName);
@@ -141,10 +118,7 @@ namespace Proyect.Linq.UI
         private void btnExcer10_Click(object sender, EventArgs e)
         {
             lbList.Items.Clear();
-            var queryProduct = productLogic.GetAll();
-            IEnumerable<Products> query = from products in queryProduct
-                                          orderby products.UnitsInStock descending
-                                          select products;
+            IEnumerable<Products> query = productLogic.GetProductUnitPriceOrderlyDesc();
             foreach (var item in query)
             {
                 lbList.Items.Add($"Nombre: {item.ProductName}, Unidades en stock: {item.UnitsInStock}");
