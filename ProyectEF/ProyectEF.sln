@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectEF.Exceptions", "Pro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectEF.LogicTests", "ProyectEF.LogicTests\ProyectEF.LogicTests.csproj", "{DB88D24A-EFE1-4DAF-8116-881DA225F86B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectEF.MVC", "ProyectEF.MVC\ProyectEF.MVC.csproj", "{BCBB492F-7710-4C4F-804A-FCCFC606A05C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{DB88D24A-EFE1-4DAF-8116-881DA225F86B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB88D24A-EFE1-4DAF-8116-881DA225F86B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB88D24A-EFE1-4DAF-8116-881DA225F86B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCBB492F-7710-4C4F-804A-FCCFC606A05C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCBB492F-7710-4C4F-804A-FCCFC606A05C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCBB492F-7710-4C4F-804A-FCCFC606A05C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCBB492F-7710-4C4F-804A-FCCFC606A05C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

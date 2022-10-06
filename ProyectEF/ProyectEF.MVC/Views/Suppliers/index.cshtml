@@ -1,0 +1,61 @@
+﻿@model ProyectEF.MVC.Models.SupplierView
+
+@{
+    ViewBag.Title = "Paguina de transportistas";
+    List<ProyectEF.MVC.Models.SupplierView> supplierViews = ViewBag.Suppliers;
+
+}
+<br>
+<div>
+    <p class="bigger">Tabla de Proveedores </p>
+</div>
+
+<br>
+<br>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre de la compania</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var supplier in supplierViews)
+            {
+                <tr>
+                    <th scope="row">@supplier.Id</th>
+                    <td>@supplier.CompanyName</td>
+                    <td>@Html.ActionLink("Borrar", "Delete", new { id = supplier.Id }, new { onclick = "return confirm('Estas seguro de borrar este registro?')" }) </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<br />
+
+<h2>Agregar Proveedor</h2>
+<br />
+<br />
+@using (Html.BeginForm("Insert", "Suppliers", FormMethod.Post))
+{
+    <label>Nombre de la compania: </label> @Html.TextBoxFor(s => s.CompanyName)
+    <input type="submit" class="btn btn-success" value="Guardar" />
+}
+<br>
+<br>
+
+<h3>Modificar Proveedor</h3>
+<br>
+<br>
+@using (Html.BeginForm("Update", "Suppliers", FormMethod.Post))
+{
+    <label>Id</label> @Html.TextBoxFor(s => s.Id);
+    <label>Nombre de la compania:  </label> @Html.TextBoxFor(s => s.CompanyName)
+    <input type="submit" class="btn btn-success" value="Guardar" />
+}
+<br>
+<br>

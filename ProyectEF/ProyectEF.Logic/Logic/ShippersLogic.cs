@@ -2,7 +2,9 @@
 using ProyectEF.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,9 +60,14 @@ namespace ProyectEF.Logic
         public void Update(Shippers shippers)
         {
             var auxShipper = _context.shippers.Find(shippers.ShipperID);
-            auxShipper.Phone = shippers.Phone;
             auxShipper.CompanyName = shippers.CompanyName;
             _context.SaveChanges();
-        } 
+        }
+        
+        public int GetIdLastShipper()
+        {
+            var query = _context.shippers.OrderByDescending(s=>s.ShipperID).Take(1);
+            return query.First().ShipperID;                                    
+        }
     }
 }
