@@ -18,6 +18,11 @@ namespace ProyectEF.Entities
 
         public Shippers() { }
 
+        public Shippers(string companyName)
+        {
+            CompanyName = companyName;
+        }
+
         [Key]
         public int ShipperID { get; set; }
 

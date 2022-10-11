@@ -1,13 +1,13 @@
-﻿@model ProyectEF.MVC.Models.SuppliersView
+﻿@model ProyectEF.MVC.Models.ShippersView
 
 @{
     ViewBag.Title = "Paguina de transportistas";
-    List<ProyectEF.MVC.Models.SuppliersView> supplierViews = ViewBag.Suppliers;
+    List<ProyectEF.MVC.Models.ShippersView> shippersViews = ViewBag.Shippers;
 
 }
 <br>
 <div>
-    <p class="bigger">Tabla de Proveedores </p>
+    <p class="bigger">Tabla de Transportistas </p>
 </div>
 
 <br>
@@ -23,12 +23,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var supplier in supplierViews)
+            @foreach (var shipper in shippersViews)
             {
                 <tr>
-                    <th scope="row">@supplier.Id</th>
-                    <td>@supplier.CompanyName</td>
-                    <td>@Html.ActionLink("Borrar", "Delete", new { id = supplier.Id }, new { onclick = "return confirm('Estas seguro de borrar este registro?')" }) </td>
+                    <th scope="row">@shipper.Id</th>
+                    <td>@shipper.CompanyName</td>
+                    <td>@Html.ActionLink("Borrar", "Delete", new { id = shipper.Id }, new { onclick = "return confirm('Estas seguro de borrar este registro?')" }) </td>                    
                 </tr>
             }
         </tbody>
@@ -37,10 +37,10 @@
 <br />
 <br />
 
-<h2>Agregar Proveedor</h2>
+<h2>Agregar transportista</h2>
 <br />
 <br />
-@using (Html.BeginForm("Insert", "Suppliers", FormMethod.Post))
+@using (Html.BeginForm("Insert", "Shippers", FormMethod.Post))
 {
     <label>Nombre de la compania: </label> @Html.TextBoxFor(s => s.CompanyName)
     <input type="submit" class="btn btn-success" value="Guardar" />
@@ -48,10 +48,10 @@
 <br>
 <br>
 
-<h3>Modificar Proveedor</h3>
+<h3>Modificar transportista</h3>
 <br>
 <br>
-@using (Html.BeginForm("Update", "Suppliers", FormMethod.Post))
+@using (Html.BeginForm("Update", "Shippers", FormMethod.Post))
 {
     <label>Id</label> @Html.TextBoxFor(s => s.Id);
     <label>Nombre de la compania:  </label> @Html.TextBoxFor(s => s.CompanyName)
@@ -59,3 +59,5 @@
 }
 <br>
 <br>
+
+

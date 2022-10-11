@@ -1,9 +1,11 @@
 ﻿using ProyectEF.Entities;
 using ProyectEF.Exceptions;
 using ProyectEF.Logic;
+using ProyectEF.WebApi.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,12 +14,18 @@ namespace ProyectEF.MVC.Models
     public class SuppliersController : Controller
     {
         SuppliersLogic logic = new SuppliersLogic();
-        // GET: Suppliers
-        public ActionResult Index()
+        IService_Api _serv;
+
+        public SuppliersController()
         {
-            SupplierView auxSupplierView = new SupplierView();
-            List<Suppliers> suppliers = logic.GetAll();
-            List<SupplierView> supplierView = suppliers.Select(s => new SupplierView
+            this._serv = new Service_Api();
+        }
+        // GET: Suppliers
+        public async Task <ActionResult> Index()
+        {
+            SuppliersView auxSupplierView = new SuppliersView();
+            List<Suppliers> suppliers = await _serv.ListSuppliers();
+            List<SuppliersView> supplierView = suppliers.Select(s => new SuppliersView
             {
                 Id = s.SupplierID.ToString(),
                 CompanyName = s.CompanyName,
@@ -26,8 +34,31 @@ namespace ProyectEF.MVC.Models
             return View(auxSupplierView);
         }
 
+        public async Task <List<SuppliersView>> List()
+        {
+            List<Suppliers> suppliers = await _serv.ListSuppliers();
+            List<SuppliersView> suppliersView = suppliers.Select(s => new SuppliersView
+            {
+                Id = s.SupplierID.ToString(),
+                CompanyName = s.CompanyName,
+            }).ToList();
+            return suppliersView;
+        }
+
+        public async Task <SuppliersView> GetById(int id)
+        {
+            Suppliers suppliers = await _serv.GetSuppliers(id);            
+            SuppliersView auxSuppliersView = new SuppliersView();
+            if (id > 0)
+            {
+                auxSuppliersView.Id = id.ToString();
+                auxSuppliersView.CompanyName = suppliers.CompanyName;
+            }
+            return auxSuppliersView;
+        }
+
         [HttpPost]
-        public ActionResult Insert(SupplierView supplierView)
+        public ActionResult Insert(SuppliersView supplierView)
         {
             try
             {
@@ -42,7 +73,7 @@ namespace ProyectEF.MVC.Models
                         }
                     }
                 }
-                logic.Add(suppliersEntity);
+                _serv.SaveSuppliers(suppliersEntity);
                 return RedirectToAction("Index");
             }
             catch (FormatException)
@@ -64,7 +95,7 @@ namespace ProyectEF.MVC.Models
         {
             try
             {
-                logic.Delete(id);
+                _serv.DeleteSuppliers(id);
                 return RedirectToAction("Index");
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException)
@@ -78,7 +109,7 @@ namespace ProyectEF.MVC.Models
         }
 
         [HttpPost]
-        public ActionResult Update(SupplierView supplierView)
+        public ActionResult Update(SuppliersView supplierView)
         {
             try
             {
@@ -108,7 +139,7 @@ namespace ProyectEF.MVC.Models
                 {
                     throw new NullStringException();
                 }
-                logic.Update(suppliersEntity);
+                _serv.EditSuppliers(suppliersEntity);
                 return RedirectToAction("Index");
             }
             catch (NullStringException)
