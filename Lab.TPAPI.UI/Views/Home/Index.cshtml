@@ -1,0 +1,30 @@
+﻿<div class="jumbotron">
+    <h1>My Web API Application</h1>
+    <p class="lead">This is a proyect with ASP.NET Web API. It can modify Order Details from the Northwind test database, and ask for Sunrise and Sunset details from the sunrise-sunset.org API.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more about ASP.NET &raquo;</a></p>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>API Documentation</h2>
+        <p>Click the link below, or click on "API" in the Navbar above to learn more
+        about my API.</p>
+        <button class="btn btn-default">
+            @Html.ActionLink("API >>", "Index", "Help", new { area = "" }, null)
+        </button>
+    </div>
+    <div class="col-md-4">
+        <h2>Inventory</h2>
+        <p>Manage the Items saved in the Orders on the Northwind Database. Click the link below, or "Inventory" in the Navbar.</p>
+        <button class="btn btn-default">
+            @Html.ActionLink("Inventory >>", "Index", "Inventory", new { area = "" }, null)
+        </button>
+    </div>
+    <div class="col-md-4">
+        <h2>Sunrise Information</h2>
+        <p>Consult the sunrise-sunset.org API about Sunrise information on Mar del Plata.
+        Click the link below, or "Sun Information" in the navbar.</p>
+        <button class="btn btn-default">
+            @Html.ActionLink("Sun Information >>", "Index", "SunInformation", new { area = "" }, null)
+        </button>
+    </div>
+</div>

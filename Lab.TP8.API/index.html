@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <p><h1>Welcome to my Web API!</h1>
+    <br />
+        Here's all requests available:<br />
+    </p>
+    <p>
+        <h2>Orders:</h2><br />
+        <a href="https://localhost:44346/api/Orders">GET Orders.</a><br />
+        <a href="https://localhost:44346/api/Orders/10248">GET a specific Order by providing an ID.</a><br />
+    </p>
+    <p>
+        <h2>Order Items:</h2><br />
+        <a href="https://localhost:44346/api/Item?orderId=10248">GET All Items from a specific Order by proving an ID.</a><br />
+        <a href="https://localhost:44346/api/Item?orderId=10248&productId=2">GET a specific Order Item by providing Order ID and Product ID.</a><br />
+        <a href="https://localhost:44346/api/Item">POST an Order Item.</a><br />
+        <a href="https://localhost:44346/api/Item">PUT an Order Item.</a><br />
+        <a href="https://localhost:44346/api/Item?orderId=10248&productId=10">DELETE an Order Item by providing Order ID and Product ID</a><br />
+    </p>
+    <p>
+        <h2>Products:</h2><br />
+        <a href="https://localhost:44354/api/Product">GET Products.</a><br />
+        <a href="https://localhost:44354/api/Product?productId=10">GET a specific Product by providing an ID.</a><br />
+    </p>
+</body>
+</html>

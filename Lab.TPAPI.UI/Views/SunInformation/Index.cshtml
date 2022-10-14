@@ -1,0 +1,12 @@
+﻿@model Lab.TPAPI.UI.Models.SunModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sunrise and Sunset in Mar del Plata for Today @DateTime.Now.ToShortDateString()</h2>
+
+<h3>Sunrise is at @Model.Sunrise.ToShortTimeString()</h3>
+
+<h3>Sunset is at @Model.Sunset.ToShortTimeString()</h3>
+
