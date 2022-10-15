@@ -1,4 +1,5 @@
-﻿using Lab.TP4.Logic;
+﻿using Lab.TP4.Entities;
+using Lab.TP4.Logic;
 using Lab.TP8.API.Models;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,70 @@ namespace Lab.TPAPI.UI.Controllers
                 result.message = ex.Message;
 
                 return result;
+            }
+        }
+
+        // POST: api/Product
+        [HttpPost]
+        public Result Post(ProductPresentation item)
+        {
+            var productPresentation = new Products()
+            {               
+                ProductID = item.ProductID,
+                UnitPrice = item.UnitPrice,
+                ProductName = item.ProductName,
+            };
+            try
+            {
+                _productsLogic.Add(productPresentation);
+
+                return new Result(true, "OK", "");
+            }
+            catch (Exception ex)
+            {
+                return new Result(ex.Message);
+            }
+        }
+
+        // PUT: api/Product
+        [HttpPut]
+        public Result Put(ProductPresentation item)
+        {
+            var product = new Products()
+            {                
+                ProductID = item.ProductID,
+                UnitPrice = item.UnitPrice,
+                ProductName = item.ProductName,
+            };
+            try
+            {
+                _productsLogic.Update(product);
+
+                return new Result(true, "OK", "");
+            }
+            catch (Exception ex)
+            {
+                return new Result(ex.Message);
+            }
+        }
+
+        // DELETE: api/Product
+        [HttpDelete]
+        public Result Delete(int productId)
+        {
+            var toDelete = new Products()
+            {
+                ProductID = productId
+            };
+
+            try
+            {
+                _productsLogic.Remove(toDelete);
+                return new Result(true, "OK", "");
+            }
+            catch (Exception ex)
+            {
+                return new Result(ex.Message);
             }
         }
     }
